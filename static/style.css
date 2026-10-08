@@ -1,0 +1,445 @@
+/* =====================================================
+   BASIC RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #080a0c;
+
+    color: #333;
+
+    min-height: 100vh;
+
+    padding: 100px;
+}
+
+
+.table-button {
+
+    height: 82px;
+
+    width: 105px;
+
+    border-radius: 10px;
+
+    border: 1px solid #d7d7d7;
+
+    background: #eeeeee;
+
+    color: #555;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+
+    box-shadow:
+
+        0 1px 2px rgba(0, 0, 0, 0.04);
+
+    transition:
+
+        transform 0.12s ease,
+
+        box-shadow 0.12s ease,
+
+        background 0.12s ease;
+}
+
+
+.table-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+
+        0 4px 10px rgba(0, 0, 0, 0.12);
+
+    background: #FF6961;
+}
+
+.table-button.active{
+    background-color: #4CAF50;
+    color: white;
+}
+
+.add-menu {
+
+    height: 82px;
+
+    width: 105px;
+
+    border:
+        2px dashed #34383d;
+
+    border-radius: 11px;
+
+    background: transparent;
+
+    color: #777;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+
+.add-menu:hover {
+
+    border-color: #888;
+
+    color: white;
+
+}
+
+
+.plus {
+
+    font-size: 32px;
+
+    font-weight: 200;
+
+}
+
+
+/*NEW SECTION ADDED*/
+
+/* --------------------------------
+   WHOLE POS PAGE
+-------------------------------- */
+
+
+
+.pos-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* --------------------------------
+   LEFT SIDE - MENU
+-------------------------------- */
+
+.menu-section {
+    width: 65%;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+
+.menu-header {
+    margin-bottom: 25px;
+}
+
+
+.menu-header h1 {
+    margin: 0;
+}
+
+
+/* Menu buttons */
+
+.menu-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+
+.menu-button {
+    min-height: 120px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: white;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 18px;
+}
+
+
+.menu-button:hover {
+    transform: scale(1.02);
+}
+
+
+.item-name {
+    font-weight: bold;
+}
+
+
+.item-price {
+    font-size: 16px;
+}
+
+
+/* --------------------------------
+   RIGHT SIDE - BILL
+-------------------------------- */
+
+.bill-section {
+    width: 35%;
+
+    background: white;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.bill-header {
+    padding: 25px;
+
+    border-bottom:
+        1px solid #ddd;
+}
+
+
+.bill-header h2 {
+    margin: 0;
+}
+
+
+/* Bill items */
+
+#bill-items {
+
+    padding: 20px;
+}
+
+
+.bill-item {
+    padding: 15px 0;
+
+    border-bottom:
+        1px solid #eee;
+}
+
+
+.bill-item-info {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    margin-bottom: 10px;
+}
+
+
+.bill-item-name {
+    font-weight: bold;
+}
+
+
+.bill-item-price {
+    font-weight: bold;
+}
+
+
+/* --------------------------------
+   QUANTITY CONTROLS
+-------------------------------- */
+
+.quantity-controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.quantity-controls button {
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+
+.quantity-controls span {
+    min-width: 25px;
+
+    text-align: center;
+}
+
+
+.quantity-controls .remove-button {
+    margin-left: auto;
+
+    background: #ddd;
+}
+
+
+/* --------------------------------
+   BOTTOM OF BILL
+-------------------------------- */
+
+.bill-bottom {
+    padding: 20px;
+
+    border-top:
+        1px solid #ddd;
+}
+
+
+.total-row {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    margin-bottom: 20px;
+}
+
+
+.save-button {
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #77DD77;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    margin-bottom: 20px;
+}
+
+
+.save-button:hover {
+    opacity: 0.85;
+}
+
+
+.clear-button {
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #FF6961;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    margin-bottom: 20px;
+}
+
+
+.clear-button:hover {
+    opacity: 0.85;
+}
+
+
+.kot-button {
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #BAE1FF;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    margin-bottom: 20px;
+}
+
+
+.kot-button:hover {
+    opacity: 0.85;
+}
+
+
+.bill-button {
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #FFDAB9;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    margin-bottom: 20px;
+}
+
+
+.bill-button:hover {
+    opacity: 0.85;
+}

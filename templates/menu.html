@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Audrey's POS - {{ table }}</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <div class="pos-container">
+
+        <!-- LEFT SIDE: MENU -->
+
+        <div class="menu-section">
+
+            <div class="menu-header">
+
+                <h1>TABLE {{ table }}</h1>
+
+            </div>
+
+
+            <div class="menu-grid">
+
+                {% for item in menu %}
+
+                    <button
+                        class="menu-button"
+                        onclick="addItem('{{ item.id }}')"
+                    >
+
+                        <span class="item-name">
+                            {{ item.name }}
+                        </span>
+
+                        <span class="item-price">
+                            ₹{{ item.price }}
+                        </span>
+
+                    </button>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE: BILL -->
+
+        <div class="bill-section">
+
+            <div class="bill-header">
+
+                <h2>TABLE {{ table }}</h2>
+
+            </div>
+
+
+            <div id="bill-items">
+
+                <!-- JavaScript will put bill items here -->
+
+            </div>
+
+
+            <div class="bill-bottom">
+
+                <div class="total-row">
+
+                    <span>TOTAL</span>
+
+                    <span id="total">
+                        ₹0
+                    </span>
+
+                </div>
+
+
+                <div class="bill-buttons">
+
+                    <button onclick="saveOrder()" class="save-button">SAVE</button>
+
+
+                    <button onclick="printKOT()" class="kot-button">KOT</button>
+
+                    <button onclick="printBill()" class="bill-button">BILL</button>
+
+                    <button onclick="clearOrder()" class="clear-button">CLEAR</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Give JavaScript the menu data -->
+
+    <script>
+
+        const menu = {{ menu | tojson }};
+
+        const savedOrder = {{ current_order | tojson }};
+
+        const tableName = "{{ table }}";
+
+    </script>
+
+
+    <script
+        src="{{ url_for('static', filename='menu.js') }}"
+    ></script>
+
+</body>
+
+</html>

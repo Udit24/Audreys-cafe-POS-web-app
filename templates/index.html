@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audreys Billdesk</title>
+</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<body>
+    <h1>Audrey's Tables</h1>
+    <div class="table-grid">
+     {% for table in tables %}
+
+    <a href="/table/{{ table }}">
+
+        <button
+            class="table-button {% if orders[table].active %}active{% endif %}"
+        >
+            {{ table }}
+        </button>
+
+    </a>
+
+    {% endfor %}
+    <!--<button class="add-menu"><span class="plus">+</span><span>Add menu item</span></button>-->
+
+</div>
+</body>
+</html>

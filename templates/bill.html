@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Bill</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            width: 80mm;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .header p {
+            margin: 3px 0;
+            font-size: 11px;
+        }
+
+        .bill-info {
+            margin-top: 15px;
+            font-size: 11px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 11px;
+        }
+
+        th {
+            border-bottom: 1px solid black;
+            padding-bottom: 5px;
+        }
+
+        td {
+            padding: 5px 0;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .summary {
+            margin-top: 10px;
+            font-size: 11px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+
+        .grand-total {
+            font-weight: bold;
+            font-size: 14px;
+            border-top: 1px solid black;
+            padding-top: 8px;
+            margin-top: 8px;
+        }
+
+        @media print {
+
+            body {
+                width: 80mm;
+                margin: 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="header">
+
+        <h1>Audreys Korean Cafe</h1>
+
+        <p>22(15) Feeder Road, Barrackpore</p>
+
+        <p>Contact: 8100030700</p>
+
+        <p>GSTIN 19ACCFA3878J1Z0</p>
+
+        <p>FSSAI 22823127000191</p>
+
+    </div>
+
+
+    <div class="bill-info">
+
+        <div>
+            DATE AND TIME:
+            <span id="bill-date"></span>
+        </div>
+
+        <div>
+            TABLE:
+            <span id="bill-table"></span>
+        </div>
+
+        <div>
+            BILL NO:
+            <span id="bill-number"></span>
+        </div>
+
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>ITEM</th>
+                <th>QTY</th>
+                <th>PRICE</th>
+                <th>AMOUNT</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="bill-items">
+
+        </tbody>
+
+    </table>
+
+
+    <div class="summary">
+
+        <div class="summary-row">
+            <span>TOTAL</span>
+            <span id="subtotal"></span>
+        </div>
+
+        <div class="summary-row">
+            <span>CGST @ 2.5%</span>
+            <span id="cgst"></span>
+        </div>
+
+        <div class="summary-row">
+            <span>SGST @ 2.5%</span>
+            <span id="sgst"></span>
+        </div>
+
+        <div class="summary-row grand-total">
+            <span>GRAND TOTAL</span>
+            <span id="grand-total"></span>
+        </div>
+
+    </div>
+<script>
+
+    window.addEventListener("message", function(event) {
+
+        // Only accept messages from our own POS
+        if (event.origin !== window.location.origin) {
+            return;
+        }
+
+        if (event.data.type !== "billData") {
+            return;
+        }
+
+        const table = event.data.table;
+        const order = event.data.order;
+
+        document.getElementById("bill-table").textContent =
+            table;
+
+        document.getElementById("bill-date").textContent =
+            new Date().toLocaleString();
+
+
+        // Generate bill number for now
+        document.getElementById("bill-number").textContent =
+    event.data.billNumber;
+
+
+        const tbody =
+            document.getElementById("bill-items");
+
+        tbody.innerHTML = "";
+
+        let subtotal = 0;
+
+
+        // Add every ordered item
+        order.forEach(function(orderedItem) {
+
+            const item = {{ menu | tojson }}.find(
+                item => item.id === orderedItem.id
+            );
+
+            if (!item) {
+                return;
+            }
+
+            const quantity = orderedItem.quantity;
+
+            const amount =
+                item.price * quantity;
+
+            subtotal += amount;
+
+
+            const row =
+                document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>${quantity}</td>
+                <td>₹${item.price.toFixed(2)}</td>
+                <td>₹${amount.toFixed(2)}</td>
+            `;
+
+            tbody.appendChild(row);
+
+        });
+
+
+        // Calculate taxes
+
+        const cgst = subtotal * 0.025;
+        const sgst = subtotal * 0.025;
+
+        const grandTotal =
+            subtotal + cgst + sgst;
+
+
+        document.getElementById("subtotal").textContent =
+            "₹" + subtotal.toFixed(2);
+
+        document.getElementById("cgst").textContent =
+            "₹" + cgst.toFixed(2);
+
+        document.getElementById("sgst").textContent =
+            "₹" + sgst.toFixed(2);
+
+        document.getElementById("grand-total").textContent =
+            "₹" + grandTotal.toFixed(2);
+
+        // Wait a moment for the bill to finish rendering
+        setTimeout(function() { window.print();
+          }, 300);
+
+    });
+window.onafterprint = function() {
+
+    let printedSuccessfully = confirm(
+        "Did the bill print successfully?"
+    );
+
+
+    if (printedSuccessfully) {
+
+        // Tell the POS window that printing succeeded
+        window.opener.postMessage(
+            {
+                type: "billPrinted"
+            },
+            window.location.origin
+        );
+
+    } else {
+
+        // Tell the POS window that printing was cancelled
+        window.opener.postMessage(
+            {
+                type: "billPrintCancelled"
+            },
+            window.location.origin
+        );
+
+    }
+
+};
+</script>
+
+</body>
+
+</html>

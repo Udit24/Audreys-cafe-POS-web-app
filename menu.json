@@ -1,0 +1,27 @@
+[
+    {
+        "id": "kimbap",
+        "name": "Kimbap",
+        "price": 300
+    },
+    {
+        "id": "ramen",
+        "name": "Ramen",
+        "price": 600
+    },
+    {
+        "id": "bibimbap",
+        "name": "Bibimbap",
+        "price": 450
+    },
+    {
+        "id": "tteokbokki",
+        "name": "Tteokbokki",
+        "price": 300
+    },
+    {
+        "id": "kfc",
+        "name": "Korean Fried Chicken",
+        "price": 250
+    }
+]

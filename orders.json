@@ -1,0 +1,95 @@
+{
+    "DA": {
+        "active": true,
+        "items": [
+            {
+                "id": "ramen",
+                "quantity": 2
+            },
+            {
+                "id": "bibimbap",
+                "quantity": 2
+            },
+            {
+                "id": "kfc",
+                "quantity": 3
+            },
+            {
+                "id": "kimbap",
+                "quantity": 1
+            },
+            {
+                "id": "tteokbokki",
+                "quantity": 1
+            }
+        ]
+    },
+    "DB": {
+        "active": false,
+        "items": []
+    },
+    "HR1": {
+        "active": false,
+        "items": []
+    },
+    "HR2": {
+        "active": false,
+        "items": []
+    },
+    "HR3": {
+        "active": false,
+        "items": []
+    },
+    "HR4": {
+        "active": false,
+        "items": []
+    },
+    "HR5": {
+        "active": false,
+        "items": []
+    },
+    "HR6": {
+        "active": false,
+        "items": []
+    },
+    "LA": {
+        "active": false,
+        "items": []
+    },
+    "LB": {
+        "active": false,
+        "items": []
+    },
+    "M": {
+        "active": false,
+        "items": []
+    },
+    "T1": {
+        "active": false,
+        "items": []
+    },
+    "T2": {
+        "active": false,
+        "items": []
+    },
+    "T3": {
+        "active": false,
+        "items": []
+    },
+    "T4": {
+        "active": false,
+        "items": []
+    },
+    "T5": {
+        "active": false,
+        "items": []
+    },
+    "LR1": {
+        "active": false,
+        "items": []
+    },
+    "LR2": {
+        "active": false,
+        "items": []
+    }
+}
